@@ -4,15 +4,15 @@
     "name": "Xample Mod",
     "description": "A mod that is used as an example.",
     "version": "${version}",
-    "mcversion": "${mcversion}",
-    "url": "https://github.com/romangraef/Forge1.8.9Template/",
-    "updateUrl": "",
-    "authorList": [
-      "You"
-    ],
-    "credits": "",
-    "logoFile": "",
-    "screenshots": [],
-    "dependencies": []
+    "mcversion": "1.12.2",
+	"url": "https://github.com/romangraef/Forge1.8.9Template/tree/1.12.2",
+	"updateUrl": "",
+	"authorList": [
+	  "You"
+	],
+	"credits": "",
+	"logoFile": "",
+	"screenshots": [],
+	"dependencies": []
   }
 ]
