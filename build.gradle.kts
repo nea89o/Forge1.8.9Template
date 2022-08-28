@@ -69,9 +69,9 @@ val shadowImpl: Configuration by configurations.creating {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:1.8.9")
-    mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
-    forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
+    minecraft("com.mojang:minecraft:1.12.2")
+    mappings("de.oceanlabs.mcp:mcp_stable:39-1.12")
+    forge("net.minecraftforge:forge:1.12.2-14.23.5.2847") // For some reason it cant find a version newer than 2847
 
     // If you don't want mixins, remove these lines
     shadowImpl("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
