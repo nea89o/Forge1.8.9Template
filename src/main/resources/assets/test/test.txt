@@ -1,0 +1,3 @@
+test
+from resource pack
+

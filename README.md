@@ -1,4 +1,4 @@
-# Architectury Loom based template for 1.8.9 forge mods
+ Architectury Loom based template for 1.8.9 kotlin forge mods
 
 **For other templates, do check out the [other branches of this repository](https://github.com/romangraef/Forge1.8.9Template/branches/all)**
 
@@ -12,6 +12,9 @@ To get started, [Use this template](https://github.com/new?template_name=Forge1.
 
 > [!WARNING]
 > Do not Fork or Clone or Download ZIP this template. If you "use" this template a custom mod id will be generated. You can do that manually using the `make-my-own` script, if you are on linux. If not, just click the use this template button. If you want to use kotlin or make a 1.12 mod check the "Include all branches" and change the default branch in https://github.com/yourname/yourreponame/branches
+
+Please note that Mixins should be kept in their own package, and should exclusively be written in Java, since older versions
+of Mixin don't play well with Kotlin.
 
 This project uses [DevAuth](https://github.com/DJtheRedstoner/DevAuth) per default, so you can log in using your real
 minecraft account. If you don't need that, you can remove it from the buildscript.

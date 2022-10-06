@@ -6,6 +6,7 @@ plugins {
     id("gg.essential.loom") version "0.10.0.+"
     id("dev.architectury.architectury-pack200") version "0.1.3"
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    kotlin("jvm") version "2.0.0"
 }
 
 //Constants:
@@ -51,8 +52,14 @@ loom {
     }
 }
 
+tasks.compileJava {
+    dependsOn(tasks.processResources)
+}
+
 sourceSets.main {
     output.setResourcesDir(sourceSets.main.flatMap { it.java.classesDirectory })
+    java.srcDir(layout.projectDirectory.dir("src/main/kotlin"))
+    kotlin.destinationDirectory.set(java.destinationDirectory)
 }
 
 // Dependencies:
@@ -72,6 +79,8 @@ dependencies {
     minecraft("com.mojang:minecraft:1.8.9")
     mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
     forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
+
+    shadowImpl(kotlin("stdlib-jdk8"))
 
     // If you don't want mixins, remove these lines
     shadowImpl("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
