@@ -23,6 +23,7 @@ called `Minecraft Client`. If it doesn't then try relaunching your IntelliJ.
 In the future, that should be handled by the plugin, but for now you'll probably have to do that manually. 
 
 To export your project, run the `gradle build` task, and give other people the
-file `build/libs/<modid>-<version>-all.jar`
+file `build/libs/<modid>-<version>.jar`. Ignore the jars in the `build/badjars` folder. Those are intermediary jars that
+are used by the build system but *do not work* in a normal forge installation.
 
 This template is licensed under the Unlicense (license copy present in this repository), or alternatively under [Creative Commons 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/), and all contributions and PR to this template are expected to follow this. This means your mod, based on this template can be licensed whatever way you want, and does not need to reference back to this template in any way.

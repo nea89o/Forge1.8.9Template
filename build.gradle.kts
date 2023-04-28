@@ -94,17 +94,23 @@ tasks.withType(Jar::class) {
 
 
 val remapJar by tasks.named<net.fabricmc.loom.task.RemapJarTask>("remapJar") {
-    archiveClassifier.set("all")
+    archiveClassifier.set("")
     from(tasks.shadowJar)
     input.set(tasks.shadowJar.get().archiveFile)
 }
 
+tasks.jar {
+    archiveClassifier.set("without-deps")
+    destinationDirectory.set(layout.buildDirectory.dir("badjars"))
+}
+
 tasks.shadowJar {
+    destinationDirectory.set(layout.buildDirectory.dir("badjars"))
     archiveClassifier.set("all-dev")
     configurations = listOf(shadowImpl)
     doLast {
         configurations.forEach {
-            println("Config: ${it.files}")
+            println("Copying jars into mod: ${it.files}")
         }
     }
 
