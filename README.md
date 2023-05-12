@@ -7,7 +7,7 @@ In `build.gradle.kts`, replace the values of `baseGroup` and `group` with your o
 In `settings.gradle.kts` change `rootProject.name` to your desired mod id.
 
 If you don't want mixins (which allow for modifying vanilla code), then you can remove the references to mixins from
-the `build.gradle.kts` at the lines specified.
+the `build.gradle.kts` at the lines specified with comments.
 
 This project uses [DevAuth](https://github.com/DJtheRedstoner/DevAuth) per default, so you can log in using your real
 minecraft account. If you don't need that, you can remove it from the buildscript.
