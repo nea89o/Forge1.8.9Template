@@ -6,8 +6,13 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-group = "com.example.archloomtemplate"
+//Constants:
+val baseGroup = "com.example"
+val modid = rootProject.name
+val mcVersion = "1.8.9"
+group = "$baseGroup.archloomtemplate"
 version = "1.0.0"
+val mixinGroup = "$group.mixin"
 
 // Toolchains:
 java {
@@ -23,17 +28,17 @@ loom {
             property("mixin.debug", "true")
             property("asmhelper.verbose", "true")
             arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
-            arg("--mixin", "mixins.examplemod.json")
+            arg("--mixin", "mixins.$modid.json")
         }
     }
     forge {
         pack200Provider.set(dev.architectury.pack200.java.Pack200Adapter())
         // If you don't want mixins, remove this lines
-        mixinConfig("mixins.examplemod.json")
+        mixinConfig("mixins.$modid.json")
     }
     // If you don't want mixins, remove these lines
     mixin {
-        defaultRefmapName.set("mixins.examplemod.refmap.json")
+        defaultRefmapName.set("mixins.$modid.refmap.json")
     }
 }
 
@@ -55,9 +60,9 @@ val shadowImpl: Configuration by configurations.creating {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:1.8.9")
-    mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
-    forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
+    minecraft("com.mojang:minecraft:$mcVersion")
+    mappings("de.oceanlabs.mcp:mcp_stable:22-$mcVersion")
+    forge("net.minecraftforge:forge:$mcVersion-11.15.1.2318-$mcVersion")
 
     // If you don't want mixins, remove these lines
     shadowImpl("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
@@ -77,15 +82,34 @@ tasks.withType(JavaCompile::class) {
 }
 
 tasks.withType(Jar::class) {
-    archiveBaseName.set("examplemod")
+    archiveBaseName.set(modid)
     manifest.attributes.run {
         this["FMLCorePluginContainsFMLMod"] = "true"
         this["ForceLoadAsMod"] = "true"
 
         // If you don't want mixins, remove these lines
         this["TweakClass"] = "org.spongepowered.asm.launch.MixinTweaker"
-        this["MixinConfigs"] = "mixins.examplemod.json"
+        this["MixinConfigs"] = "mixins.$modid.json"
     }
+}
+
+tasks.processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+    inputs.property("version", project.version)
+    inputs.property("mcversion", mcVersion)
+    inputs.property("modid", modid)
+    inputs.property("mixinGroup", mixinGroup)
+
+    //replace stuff in mcmod.info, nothing else
+    from(sourceSets["main"].resources.srcDir("resources")) {
+        include("mcmod.info")
+        include("mixins.$modid.json")
+
+        expand(inputs.properties)
+    }
+
+    rename("(.+_at.cfg)", "META-INF/$1")
 }
 
 
@@ -111,7 +135,7 @@ tasks.shadowJar {
     }
 
     // If you want to include other dependencies and shadow them, you can relocate them in here
-    fun relocate(name: String) = relocate(name, "com.examplemod.deps.$name")
+    fun relocate(name: String) = relocate(name, "$baseGroup.deps.$name")
 }
 
 tasks.assemble.get().dependsOn(tasks.remapJar)
