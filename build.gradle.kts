@@ -7,12 +7,12 @@ plugins {
 }
 
 //Constants:
-val baseGroup = "com.example"
+
+val baseGroup: String by project
+val mcVersion: String by project
+val version: String by project
+val mixinGroup = "$baseGroup.mixin"
 val modid = rootProject.name
-val mcVersion = "1.8.9"
-group = "$baseGroup.archloomtemplate"
-version = "1.0.0"
-val mixinGroup = "$group.mixin"
 
 // Toolchains:
 java {
@@ -60,9 +60,9 @@ val shadowImpl: Configuration by configurations.creating {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:$mcVersion")
-    mappings("de.oceanlabs.mcp:mcp_stable:22-$mcVersion")
-    forge("net.minecraftforge:forge:$mcVersion-11.15.1.2318-$mcVersion")
+    minecraft("com.mojang:minecraft:1.8.9")
+    mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
+    forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
 
     // If you don't want mixins, remove these lines
     shadowImpl("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
@@ -94,8 +94,6 @@ tasks.withType(Jar::class) {
 }
 
 tasks.processResources {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-
     inputs.property("version", project.version)
     inputs.property("mcversion", mcVersion)
     inputs.property("modid", modid)
