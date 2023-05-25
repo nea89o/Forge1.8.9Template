@@ -99,10 +99,7 @@ tasks.processResources {
     inputs.property("modid", modid)
     inputs.property("mixinGroup", mixinGroup)
 
-    from(sourceSets["main"].resources.srcDir("resources")) {
-        include("mcmod.info")
-        include("mixins.$modid.json")
-
+    filesMatching(listOf("mcmod.info", "mixins.$modid.json")) {
         expand(inputs.properties)
     }
 
