@@ -99,7 +99,6 @@ tasks.processResources {
     inputs.property("modid", modid)
     inputs.property("mixinGroup", mixinGroup)
 
-    //replace stuff in mcmod.info, nothing else
     from(sourceSets["main"].resources.srcDir("resources")) {
         include("mcmod.info")
         include("mixins.$modid.json")
