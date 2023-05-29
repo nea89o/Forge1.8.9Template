@@ -2,10 +2,14 @@
 
 **For other templates, do check out the [other branches of this repository](https://github.com/romangraef/Forge1.8.9Template/branches/all)**
 
-To get started, clone this repository and replace all references to `examplemod` or `com.example` with your own names.
+To get started, clone this repository.
+In `build.gradle.kts`, replace the values of `baseGroup` and `group` with your own names.
+In `settings.gradle.kts` change `rootProject.name` to your desired mod id.
+
+The `com.example` package needs to be renamed to match the value of `baseGroup`.
 
 If you don't want mixins (which allow for modifying vanilla code), then you can remove the references to mixins from
-the `build.gradle.kts`, delete the `mixins.examplemod.json` and the `com.example.mixin` package.
+the `build.gradle.kts` at the lines specified with comments and the `com.example.mixin` package.
 
 Please note that Mixins should be kept in their own package, and should exclusively be written in Java, since older versions
 of Mixin don't play well with Kotlin.
