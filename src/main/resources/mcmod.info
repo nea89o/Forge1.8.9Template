@@ -4,7 +4,7 @@
     "name": "Xample Mod",
     "description": "A mod that is used as an example.",
     "version": "${version}",
-    "mcversion": "1.8.9",
+    "mcversion": "${mcversion}",
     "url": "https://github.com/romangraef/Forge1.8.9Template/",
     "updateUrl": "",
     "authorList": [

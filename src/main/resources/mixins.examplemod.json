@@ -1,6 +1,6 @@
 {
-  "package": "com.example.mixin",
-  "refmap": "mixins.examplemod.refmap.json",
+  "package": "${mixinGroup}",
+  "refmap": "mixins.${modid}.refmap.json",
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
