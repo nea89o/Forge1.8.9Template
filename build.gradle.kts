@@ -42,7 +42,7 @@ loom {
 }
 
 sourceSets.main {
-    output.resourcesDir = file("$buildDir/classes/java/main")
+    output.resourcesDir = file("${layout.buildDirectory}/classes/java/main")
 }
 
 // Dependencies:
