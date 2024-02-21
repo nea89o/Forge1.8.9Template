@@ -20,7 +20,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Execute Gradle build
-        run: ./gradlew build
+        run: gradle build
 
       - name: Upload built mod JAR
         uses: actions/upload-artifact@v4.3.0
