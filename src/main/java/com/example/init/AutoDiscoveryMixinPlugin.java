@@ -23,9 +23,9 @@ import java.util.zip.ZipInputStream;
  * <p>
  * This mixin plugin automatically scans your entire JAR (or class directory, in case of an in-IDE launch) for classes inside of your
  * mixin package and registers those. It does this recursively for sub packages of the mixin package as well. This means you will need
- * to only have mixin classes inside of your mixin package, which is good style anyway.
+ * to only have mixin classes inside your mixin package, which is good style anyway.
  *
- * @author Linnea Gräf
+ * @author <a href="https://github.com/nea89o">Linnea Gräf</a>
  */
 public class AutoDiscoveryMixinPlugin implements IMixinConfigPlugin {
     private static final List<AutoDiscoveryMixinPlugin> mixinPlugins = new ArrayList<>();

@@ -1,0 +1,35 @@
+name: Template Verify
+on:
+  push:
+    branches: [main]
+    paths: ['**/gradle.properties']
+  pull_request:
+    paths: ['**/gradle.properties']
+
+jobs:
+  build:
+    name: Template Verify
+    if: github.event.repository.name == 'Forge1.8.9Template'
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.properties.outputs.version }}
+      changelog: ${{ steps.properties.outputs.changelog }}
+    steps:
+      - name: Fetch Sources
+        uses: actions/checkout@v4
+
+      - name: Verify gradle.properties
+        run: |
+          echo "\`\`\`diff" >> $GITHUB_STEP_SUMMARY
+
+          diff -U 0 \
+            -I '^modVersion' \
+            -I '^modGroup' \
+            -I '^modName' \
+            -I '^modGitHub' \
+            --label .github/template-cleanup/gradle.properties \
+            --label gradle.properties \
+            .github/template-cleanup/gradle.properties gradle.properties \
+            >> $GITHUB_STEP_SUMMARY
+
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY

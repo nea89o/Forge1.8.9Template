@@ -1,0 +1,54 @@
+name: Template Cleanup
+on:
+  push:
+    branches: [main]
+
+jobs:
+  template-cleanup:
+    name: Template Cleanup
+    runs-on: ubuntu-latest
+    if: github.event.repository.name != 'Forge1.8.9Template'
+    permissions:
+      contents: write
+    steps:
+      - name: Fetch Sources
+        uses: actions/checkout@v4
+
+      - name: Cleanup
+        run: |
+          NAME="${GITHUB_REPOSITORY##*/}"
+          ACTOR=$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')
+          SAFE_NAME=$(echo $NAME | sed 's/[^a-zA-Z0-9]//g' | tr '[:upper:]' '[:lower:]')
+          SAFE_ACTOR=$(echo $ACTOR | sed 's/[^a-zA-Z0-9]//g' | tr '[:upper:]' '[:lower:]')
+          GROUP="com.github.$SAFE_ACTOR.$SAFE_NAME"
+          
+          sed -i "s/%NAME%/$NAME/g" .github/template-cleanup/*
+          sed -i "s/%REPOSITORY%/${GITHUB_REPOSITORY/\//\\/}/g" .github/template-cleanup/*
+          sed -i "s/%GROUP%/$GROUP/g" .github/template-cleanup/*
+          
+          find src -type f -exec sed -i "s/com.example/$GROUP/g" {} +
+          find src -type f -exec sed -i "s/Example Mod/$NAME/g" {} +
+          find src -type f -exec sed -i "s/Authors/$ACTOR/g" {} +
+          
+          mkdir -p src/main/java/${GROUP//.//}
+          cp -R .github/template-cleanup/. .
+          cp -R src/main/java/com/example/* src/main/java/${GROUP//.//}/
+          
+          rm -rf \
+            .github/template-cleanup \
+            .github/workflows/template-cleanup.yml \
+            .github/workflows/template-verify.yml \
+            LICENSE
+
+      - name: Commit Files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Template cleanup"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
