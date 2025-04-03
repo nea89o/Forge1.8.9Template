@@ -7,7 +7,7 @@ pluginManagement {
         maven("https://maven.fabricmc.net")
         maven("https://maven.minecraftforge.net/")
         maven("https://repo.spongepowered.org/maven/")
-        maven("https://repo.sk1er.club/repository/maven-releases/")
+        maven("https://repo.essential.gg/repository/maven-releases/")
     }
     resolutionStrategy {
         eachPlugin {
