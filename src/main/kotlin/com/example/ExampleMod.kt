@@ -5,9 +5,10 @@ import net.minecraft.init.Blocks
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraft.client.renderer.GlStateManager
+import moe.hazuki.forgelin.KOTLIN_LANGUAGE_ADAPTER
 
-@Mod(modid = "examplemod", useMetadata = true)
-class ExampleMod {
+@Mod(modid = "examplemod", useMetadata = true, modLanguageAdapter = KOTLIN_LANGUAGE_ADAPTER)
+object ExampleMod {
     @Mod.EventHandler
     fun init(event: FMLInitializationEvent) {
         try {
