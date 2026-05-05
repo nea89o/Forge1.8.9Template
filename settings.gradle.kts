@@ -7,12 +7,12 @@ pluginManagement {
         maven("https://maven.fabricmc.net")
         maven("https://maven.minecraftforge.net/")
         maven("https://repo.spongepowered.org/maven/")
-        maven("https://repo.essential.gg/repository/maven-releases/")
+        maven("https://repo.polyfrost.org/releases/")
     }
     resolutionStrategy {
         eachPlugin {
             when (requested.id.id) {
-                "gg.essential.loom" -> useModule("gg.essential:architectury-loom:${requested.version}")
+                "cc.polyfrost.loom" -> useModule("cc.polyfrost:architectury-loom:${requested.version}")
             }
         }
     }
